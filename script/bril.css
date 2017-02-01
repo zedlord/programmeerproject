@@ -1,0 +1,110 @@
+/*Name: Zelda Zeegers
+Student number: 11397705*/
+
+body {
+  background: #333;
+  color: #ddd;
+}
+h1 {
+  color: white;
+  font-size: 2.25em;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  text-shadow: 0px 2px 0px #000000;
+}
+
+#carosel{
+  position:absolute;
+  top:0;
+  right:0;
+  width:200px;
+}
+
+#area1{
+  position:absolute;
+  top:400px;
+  right:400px;
+  width:500px;
+}
+
+#area2{
+  position:absolute;
+  top:400px;
+  right:700px;
+  width:500px
+}
+
+/* axis layout*/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #ccccff;
+}
+.x.axis path {
+  fill: none;
+  stroke: #ccccff;
+}
+.axis text{
+  fill: #ccccff;
+}
+
+/* lay out of all the lines*/
+.line {
+  fill: none;
+  stroke: #cc99ff;
+  stroke-width: 1.5px;
+}
+
+/* lay out of the interactive properties*/
+.overlay {
+    fill: none;
+  pointer-events: all;
+}
+
+/* layout of the circles and text of the values that are shown while hovering*/
+.focus circle {
+  fill: #cc99ff;
+  stroke: black;
+}
+.focus text{
+  font-weight: bold;
+}
+
+#tooltip {
+position: absolute;
+width: 220px;
+height: auto;
+padding: 10px;
+background-color: rgba(0, 0, 0, 0.6);
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+pointer-events: none;
+}
+
+#tooltip.hidden {
+display: none;
+}
+
+#tooltip p {
+margin: 0;
+font-family: sans-serif;
+font-size: 16px;
+line-height: 20px;
+}
+
+#pic1.hidden {
+display: none;
+}
+
+#pic2.hidden {
+display: none;
+}
+
+#pic3.hidden {
+display: none;
+}

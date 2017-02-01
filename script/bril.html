@@ -1,0 +1,69 @@
+<!--
+Zelda Zeegers
+11397705
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="bril.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="bril.js"></script>
+<body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <div class="container" id="carosell">
+    <h2>A selection of Images</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="carousel slide" id="theCarousel">
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <a href="#1"><img class="d-block img-fluid" src="1.jpg" id="pic1" style='height:10em; margin-left:auto; margin-right:auto' onClick ="clicker(this.src)"/></a>
+            </div>
+            <div class="item">
+              <a href="#1"><img class="d-block img-fluid" src="2.jpg" id="pic2" style='height:10em; margin-left:auto; margin-right:auto' onClick ="clicker(this.src)"/></a>
+            </div>
+            <div class="item">
+              <a href="#1"><img class="d-block img-fluid" src="3.jpg" id="pic3" style='height:10em; margin-left:auto; margin-right:auto' onClick ="clicker(this.src)"/></a>
+            </div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+          <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container">
+  <h2>The Lifetime changes of an Artist</h2>
+  <h2>Choose an artist and a plot</h2>
+  <div class="form-group">
+        <div class="col-sm-2">
+          <select class="form-control" id="painter"  onchange="loadData()">
+            <option data-hidden="true"></option>
+            <option>Dali</option>
+            <option>Klee</option>
+            <option>Kahlo</option>
+          </select>
+        </div>
+  </div>
+  <div class="btn-group btn-group-md" role="group" data-toggle="buttons">
+    <button onclick = "changeData('Color Usage')" type = "button" class="btn btn-default" >Color Usage</button>
+    <button onclick = "changeData('Brightness')" type = "button" class="btn btn-default" >Brightness</button>
+  </div>
+  <div class="row row-centered">
+    <div id="area1">
+      <div class = "hidden" id="tooltip">
+        <p><span id="value"></span></p>
+      </div></div>
+    <div id="area2"></div>
+  </div>
+</div>
+
+</body>
+</html>
