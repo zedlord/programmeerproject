@@ -4,7 +4,7 @@
 
 Mijn project heeft is een visualisatie van de evaluatie in kleurgebruik en helderheid van drie verschillende kunstenaars die in de 20ste eeuw geleefd hebben. De gebruiker heeft de keuze tussen Salvador Dali, Paul Klee en Frieda Kahlo. Elk datapunt is gebaseerd op minstens 3 schilderijen die er bekent zijn in het desbetreffende jaar.
 
-![Screenshot](doc/screenshot.png)
+![Screenshot](doc/screenshot.PNG)
 
 ### Design
 
