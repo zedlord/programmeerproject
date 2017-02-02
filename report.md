@@ -8,7 +8,15 @@ Mijn project heeft is een visualisatie van de evaluatie in kleurgebruik en helde
 
 ## Design
 
+### Data verzamelen
+
 Rgbvalue.py is een script dat gebruikt wordt om afbeeldingen uit een gewenste map te analyseren betreffende de rgb waarde. Het programma werkt als volgt. Handmatig moet de naam van de folder in het script worden gezet op regel 13. De naam is een string. Vervolgens wordt er geïtereerd over alle files in e folder en van elk file wordt pixel voor pixel de rgb waarde bepaald. Na alle pixels te hebben bekeken wordt het gemiddelde berekend. Dat is dus de rgb waarde van de afbeelding. Het is belangrijk dat de namen van de afbeeldingen er als volgt uitzien: yyyy.jpg of yyyy (x).jpg waarin yyyy het jaartal is en x het hoeveelste schilderij in dat jaartal. Er zijn twee verschillende jsonfiles waar de waardes naartoe worden geschreven. De een heeft de rgb waardes per jaar opgeslagen de ander heeft de rgb waardes per schilderij opgeslagen.
+
+### Data structuur
+
+Om te beginnen bestaan er drie verschillende mappen met afbeeldingen. De naam van de afbeeldingen is altijd yyyy.jpg of yyyy (x).jpg. Waar yyyy het jaar is waarin het schilderij is gemaakt en x het hoeveelste schilderij dat is gemaakt dat jaar. Daarnaast zijn er per schilder twee jsonfiles; een met de rgb waardes per schilderij, de andere met de rgb waardes per jaar. Tot slot is er voor elke schilder een tsv bestand met daarin de belangrijkste gebeurtenissen uit het leven van de schilder.
+
+### html en javascript
 
 In plots.html worden de verschillende libaries ingeladen. Het programma maakt gebruik van bootstrap en daarom ook van ajax. Daarnaast wordt de standaard d3 libarie ingeladen en een uitbereiding met tooltip. Eerst wordt de carrousel gemaakt met standaard drie foto&#39;s (van elke kunstenaar een) later wordt er een selectie van schilderijen van een gekozen jaar afgebeeld.  In de containerclass wordt de dropdown gemaakt waarin je tussen verschillende kunstenaars kunt kiezen en de knoppen waarin je kunt kiezen tussen verschillende data. Ook worden er area1, voor de areagraph en de linechart, en area 2, voor de donutchart, gemaakt
 
@@ -16,57 +24,15 @@ plots.js is opgebouwd uit vier functies. Deze functies tekenen de twee belangrij
 
 In plots.js bestaan twee globale variabelen: painter en graph. Dit zijn de twee variabelen die de gebruiker kan veranderen door middel van de dropdown en de buttons op de pagina. Wanneer de dropdown van waarde verandert wordt de functie loadData aangeroepen. De variabele painter krijgt een waarde door de input op te vragen. Wanneer er op een van de buttons wordt geklikt. Wordt de functie changeData aangeroepen. De gebruiker kan kiezen tussen Color Usage en Brightness. Deze keuze wordt ook meegegeven aan de functie.
 
-Beide functies roepen een nieuwe functie aan namelijk: update. Update zorgt ervoor dat de juiste grafiek wordt getekend met de juiste kunstenaar. Ook checkt de grafiek of een van de variablen leeg is of een verkeerde waarde hebben, dan gebeurd er namelijk niets. Elke keer als er iets veranderd in de input wordt update opnieuw aangeroepen. De oude grafiek wordt dan ook verwijderd.
+--*Beide functies roepen een nieuwe functie aan namelijk: update. Update zorgt ervoor dat de juiste grafiek wordt getekend met de juiste kunstenaar. Ook checkt de grafiek of een van de variablen leeg is of een verkeerde waarde hebben, dan gebeurd er namelijk niets. Elke keer als er iets veranderd in de input wordt update opnieuw aangeroepen. De oude grafiek wordt dan ook verwijderd.
 
-In de functie colorplot wordt de areagraph getekend die het kleurgebruik (rood, groen en blauw) van de schilder door de jaren heen weergeeft. In de html is hiervoor een speciale div aangemaakt om de plaats te bepalen van deze grafiek met id: area1. Ook wordt er een tooltip toegevoegd aan deze area. (in de tooltip zal later informatie worden weergegeven. Een aantal variabelen worden gemaakt, parsDate, formatValue, bisectDatum en formatMaking. Dit zijn functies die zullen helpen met het veranderen van de datum in een datum object en andersom. Elke area in een areagraph heeft een onder en bovengrens daarom is de data van een area gespitst in y0(de ondergrens) en y1 (de bovengrens). Met de ingebouwde d3 functie curveCatmullRom worden de lijnen in de graph afgerond.
+--*In de functie colorplot wordt de areagraph getekend die het kleurgebruik (rood, groen en blauw) van de schilder door de jaren heen weergeeft. In de html is hiervoor een speciale div aangemaakt om de plaats te bepalen van deze grafiek met id: area1. Ook wordt er een tooltip toegevoegd aan deze area. (in de tooltip zal later informatie worden weergegeven. Een aantal variabelen worden gemaakt, parsDate, formatValue, bisectDatum en formatMaking. Dit zijn functies die zullen helpen met het veranderen van de datum in een datum object en andersom. Elke area in een areagraph heeft een onder en bovengrens daarom is de data van een area gespitst in y0(de ondergrens) en y1 (de bovengrens). Met de ingebouwde d3 functie curveCatmullRom worden de lijnen in de graph afgerond. De data is nog raw en moet een beetje worden aangepast. De waardes van de verschillende kleuren moeten kleiner worden en de datum moet een javascript dateobject worden. De data wordt opgeslagen in de stack. Er worden layers aangemaakt, voor elke kleur wordt de data uit de stack gehaald. Wanneer we over een area hoveren wordt deze duidelijk gemaakt doordat de andere twee areas een beetje doorzichtig worden. Ook worden er van speciale jaren een tooltip geopend door de functie maketips aan te roepen. Wanneer er iets bijzonders gebeurd is in het jaar wordt dat weergegeven in de tooltip. Wanneer je op een jaar klikt worden ook de schilderijen in de carrousel aangepast naar schilderijen die er zijn gemaakt in dat specifieke jaar.
 
-De data voor het tekenen van de grafiek wordt uit een json gehaald. Welke jsonfile dat is, is afhankelijk van de gekozen kunstenaar. De jsonfile ziet er als volgt uit:
+--*In de functie brightplot wordt een linechart getekend waarin de helderheid van de schilderijen die de kunstenaar heeft gemaakt door de jaren heen wordt weergegeven. Deze wordt wederom in area 1 geplaatst. De data wordt uit dezelfde jsonfile gehaald als in colorplot. d.total is de helderheid van het schilderij. Er wordt een focus toegevoegd waardoor je wanneer je over het de line hovert er een bolletje bij de datapunten verschijnt. Ook wordt het jaartal dan uitgebeeld. De kleur van de tekst veranderd wanneer er informatie beschrikbaar is over wat er in dat jaar gebeurd is met de kunstenaar. Wanneer je dan klikt verschijnt er een tooltip met deze informatie. De informatie wordt uit de tsv-file gehaald. De tooltip wordt gemaakt door de functie maketips aan te roepen. Ook veranderen de plaatjes in de carrousel wanneer je op een jaar klikt.
 
-[
+--*In de functie maketips worden twee dingen uitgevoerd. Ten eerste wordt er een tooltip gemaakt waarin, als er informatie is over het gekozen jaar, deze informatie staat. Daarnaast verandert de tooltip de afbeeldingen in de carrousel naar schilderijen van de gekozen kunstenaar in het gekozen jaar. Om dit te doen heeft de functie de x en y positie nodig waar geklikt wordt en het jaar dat hierbij hoort. Change is een variable die wordt meegegeven zodat de schilderijen bij een hover niet veranderen en bij een click wel. 0 staat voor niet veranderen 1 staat voor wel veranderen.
 
-{
-
-                   blue: 22.155906565233472,
-
-                   total;: 266.83846703573886,
-
-                   green: 36.846470463420985,
-
-                   red: 40.99762297134555,
-
-                   year: 1913
-
-},
-
-{
-
-                    blue: 35.215789795787614,
-
-                   total;: 355.8334477574946,
-
-                    &quot;green&quot;: 36.615292240782686,
-
-                    &quot;red&quot;: 28.168917963429703,
-
-                    &quot;year&quot;: &quot;1914&quot;
-
-},
-
-...
-
-]
-
-De data is nog raw en moet een beetje worden aangepast. De waardes van de verschillende kleuren moeten kleiner worden en de datum moet een javascript dateobject worden. De data wordt opgeslagen in de stack. Er worden layers aangemaakt, voor elke kleur wordt de data uit de stack gehaald.
-
-Wanneer we over een area hoveren wordt deze duidelijk gemaakt doordat de andere twee area&#39;s een beetje doorzichtig worden.
-
-Ook wordt er een verticale lijn toegevoegd die meebeweegt wanneer je over de area&#39;s hovert. Deze veranderd van kleur wanneer er informatie over de schilder is in dat jaar. Als je dan klikt krijg je een tooltip te zien die de informatie van dat jaar laat zien.  Deze data wordt uit een tsv file gehaald. De tooltip wordt gemaakt door maketips aan te roepen. De muispositie en het bepaalde jaar worden meegegeven. Ook veranderen de plaatjes in de carrousel wanneer je op een jaar klikt.
-
-In de functie brightplot wordt een linechart getekend waarin de helderheid van de schilderijen die de kunstenaar heeft gemaakt door de jaren heen wordt weergegeven. Deze wordt wederom in area 1 geplaatst. De data wordt uit dezelfde jsonfile gehaald als in colorplot. d.total is de helderheid van het schilderij. Er wordt een focus toegevoegd waardoor je wanneer je over het de line hovert er een bolletje bij de datapunten verschijnt. Ook wordt het jaartal dan uitgebeeld. De kleur van de tekst veranderd wanneer er informatie beschrikbaar is over wat er in dat jaar gebeurd is met de kunstenaar. Wanneer je dan klikt verschijnt er een tooltip met deze informatie. De informatie wordt uit de tsv-file gehaald. De tooltip wordt gemaakt door de functie maketips aan te roepen. Ook veranderen de plaatjes in de carrousel wanneer je op een jaar klikt.
-
-In de functie maketips worden twee dingen uitgevoerd. Ten eerste wordt er een tooltip gemaakt waarin, als er informatie is over het gekozen jaar, deze informatie staat. Daarnaast verandert de tooltip de afbeeldingen in de carrousel naar schilderijen van de gekozen kunstenaar in het gekozen jaar. Om dit te doen heeft de functie de x en y positie nodig waar geklikt wordt en het jaar dat hierbij hoort.
-
-Wanneer er op een schilderij in de carrousel wordt geklikt wordt er een donutchart aangemaakt waarin wordt weergegeven hoeveel van de kleuren er in dat specifieke schilderij gebruikt zijn. De functie die hiervoor zorgt is clicker. De functie krijgt de naam van het bestand waarop geklikt is mee. Namen van schilderijen zien er altijd als volgt uit: yyyy.jpg of yyyy (x).jpg. Waarin yyyy staat voor het jaar waarin het schilderij is gemaakt en x voor het hoeveelste schilderij het was dat jaar. In de jsonfile die wordt gebruikt voor de donutchart staat per bestandsnaam het rood, groen en blauw gebruik opgeslagen. Door een innerradius te kiezen ontstaat er een gat in het midden. Hier moet er informatie over de hoeveelheid kleur er gebruikt is wanneer je over een slice hovert. Ook wordt de grootte van de slice dan aangepast.
+--*Wanneer er op een schilderij in de carrousel wordt geklikt wordt er een donutchart aangemaakt waarin wordt weergegeven hoeveel van de kleuren er in dat specifieke schilderij gebruikt zijn. De functie die hiervoor zorgt is clicker. De functie krijgt de naam van het bestand waarop geklikt is mee. In de jsonfile die wordt gebruikt voor de donutchart staat per bestandsnaam het rood, groen en blauw gebruik opgeslagen. Door een innerradius te kiezen ontstaat er een gat in het midden. Hier moet er informatie over de hoeveelheid kleur er gebruikt is wanneer je over een slice hovert. Ook wordt de grootte van de slice dan aangepast.
 
 ## Process
 
