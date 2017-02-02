@@ -64,8 +64,8 @@ Wanneer er op een schilderij in de carrousel wordt geklikt wordt er een donutcha
 | --- | --- |
 | Maandag | De piechart laat nu de waardes zien van de slice waar je overheen hovert. De crosshair is eindelijk niet meer te groot maar hij blijft nog steeds staan wanneer ik op iets anders klik. Daarnaast gaat hij soms van de grafiek af. De grafieken staan wel op de juiste plaats op de pagina. Ik heb een button gemaakt ipv een select omdat ik dit mooier vond. |
 | Dinsdag | Ik heb juiste kleuren uitgekozen voor mijn grafieken en pagina. Ik heb een gedetailleerde uitleg geschreven van mijn programma. Ik heb mijn code opgeschoond en comments toegevoegd. Ik heb nog een extra kunstenaar toegevoegd: Frieda Kahlo. |
-| Woensdag |   |
-| Donderdag |   |
+| Woensdag | IK heb mijn verslag afgemaakt. De pagina nog mooier proberen te maken. Nog meer nagedacht over de areagraph en zijn verticale crosshair maar ik kom er nog steeds niet uit.  |
+| Donderdag | Ik heb besloten om de crosshair weg te laten Ik heb nagedacht over mijn precentatie. De kleuren nog een beetje aangepast. Mijn site online gezet  |
 | Vrijdag | Presentatie |
 
 ## Defence
