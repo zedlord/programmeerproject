@@ -1,6 +1,6 @@
 # Door een gekleurde bril
 
->ik geloof in de toekomstige oplossing van deze beide uiterlijk zo tegenstrijdig schijnende toestanden - droom en werkelijkheid - in een soort van absolute werkelijkheid: een surrealiteit. ->André Breton
+>ik geloof in de toekomstige oplossing van deze beide uiterlijk zo tegenstrijdig schijnende toestanden - droom en werkelijkheid - in een soort van absolute werkelijkheid: een surrealiteit. - André Breton
 
 Wat is de werkelijkheid? Een belangrijke vraag voor surrealisten, en waarschijnlijk voor iedereen. Het surrealisme is een kunststroming die nogal voor veel oproer heeft gezorgd. Surrealisten nemen niet genoegen met de logisch werkelijkheid en gaan op zoek naar een vertaling van de werkelijkheid, namelijk in de in de onontgonnen gebieden van de menselijke geest. Droom en het onderbewuste worden net zo belangrijk als de fysieke werkelijkheid.
 
