@@ -58,18 +58,9 @@ function colorplot(){
       .style("top", "30px")
       .style("left", "55px");
 
-  var color = "blue"
-  var colorrange = [];
 
-  if (color == "red") {
-    colorrange = ["#9B0000", "#007615", "#1E066A"];
-  }
-  else if (color == "green") {
-    colorrange = ["#B0B0FF", "#B0FFB0", "#FFB0B0"];
-  }
-  else if (color == "blue") {
-    colorrange = ["#700000", "#006500", "#00003F"];
-  }
+  var colorrange = ["#700000", "#006500", "#00003F"];
+
   strokecolor = colorrange[0];
 
   var margin = {top: 20, right: 50, bottom: 30, left: 50},
@@ -172,7 +163,7 @@ function colorplot(){
         svg.selectAll(".layer").transition()
           .duration(250)
           .attr("opacity", function(d, j) {
-          return j != i ? 0.6 : 1; }) })
+            return j != i ? 0.4 : 1; }) })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
           .transition()
@@ -181,61 +172,30 @@ function colorplot(){
         d3.select(this)
           .classed("hover", false)});
 
-    // vertical line when hover
-    var vertical = d3.select(".chart")
-          .append("div")
-          .attr("class", "remove")
-          .style("position", "absolute")
-          .style("width", "1px")
-          .style("height", "200px")
-          .style("top", "42px")
-          .style("bottom", "30px")
-          .style("left", "30px")
-          .style("background", "#000");
 
     // mousemove show vertical line
     d3.select(".chart")
         .on("mousemove", function(){
-           mousex = d3.mouse(this);
-           mousex = mousex[0] + 5;
-           vertical.style("left", mousex + "px" )})
-        .on("mouseover", function(){
-           mousex = d3.mouse(this);
-           mousex = mousex[0] + 5;
-           vertical.style("left", mousex + "px")
-
-           // get the data at the x and y coordinate of the mouse
-           var x0 = x.invert(d3.mouse(this)[0]),
-               i = bisectDatum(data, x0, 1),
+            // get the data at the x and y coordinate of the mouse
+           var mouse = d3.mouse(this);
+           console.log(bisectDatum(data, x.invert(mouse[0], 1)))
+           var x0 = x.invert(mouse[0]),
+               i = bisectDatum(data, x0, 1) - 2,
                d0 = data[i - 1],
                d1 = data[i],
                d = x0 - d0.year > d1.year - x0 ? d1 : d0
+          maketips(0, mouse[0],mouse[1],formatMaking(d.year))})
 
-           var colorchange = false
 
-           // data from tsv file about life of choosen painter
-           // vertical line color changes when there is information that year
-           d3.tsv(painter+"_info.tsv", function(data) {
-             data.forEach(function(b){
-                 if (b.year == formatMaking(d.year)){
-                   vertical.style("background", "red")
-                   colorchange = true
-                 }
-               })
-             })
-             if (colorchange == false){
-               vertical.style("background", "black")
-             }
-         })
         .on("click",function(){
-          var x0 = x.invert(d3.mouse(this)[0]),
-              i = bisectDatum(data, x0, 1),
+          // get the data at the x and y coordinate of the mouse
+          var mouse = d3.mouse(this)
+          var x0 = x.invert(mouse[0]),
+              i = bisectDatum(data, x0, 1) - 2,
               d0 = data[i - 1],
               d1 = data[i],
               d = x0 - d0.year > d1.year - x0 ? d1 : d0
-          console.log(d.year)
-          mouse = d3.mouse(this)
-          maketips(mouse[0],mouse[1],formatMaking(d.year))})
+          maketips(1, mouse[0],mouse[1],formatMaking(d.year))})
   })
 }
 
@@ -335,6 +295,7 @@ function brightplot(){
         .on("mouseover", function() { focus.style("display", null); })
         .on("mouseout", function() { focus.style("display", "none"); })
         .on("mousemove", function(){
+          console.log(bisectDatum(data, x.invert(d3.mouse(this)[0]), 1))
           var x0 = x.invert(d3.mouse(this)[0]),
               i = bisectDatum(data, x0, 1),
               d0 = data[i - 1],
@@ -346,7 +307,7 @@ function brightplot(){
                   //Get this bar's x/y values, then augment for the tooltip
                   var xPosition = parseFloat(d3.mouse(this)[0]);
                   var yPosition = height+100;
-                  maketips(xPosition,yPosition,formatMaking(d.year))
+                  maketips(1, xPosition,yPosition,formatMaking(d.year))
             })
 
           // what shoud be showed when the mouse hovers
@@ -374,7 +335,7 @@ function brightplot(){
   This function shows, if there is any, information about the choosen year
   in the tooltip. It changes also the paintings that are shown in the carousel.
 */
-function maketips(xPosition,yPosition,year) {
+function maketips(change, xPosition,yPosition,year) {
 
   // check if there is information about the selected year
   var updated = false;
@@ -387,9 +348,10 @@ function maketips(xPosition,yPosition,year) {
         // there is information so updates = true
         updated = true;
         // update the tooltip position and value
+        pos = xPosition + 600
         d3.select("#tooltip")
-          .style("left", xPosition + "px")
-          .style("top", yPosition + "px")
+          .style("left", pos + "px")
+          .style("top", 320 + "px")
           .select("#value")
           .text(b.text)
         // show the tooltip
@@ -404,19 +366,21 @@ function maketips(xPosition,yPosition,year) {
       }
     })
 
-    // change the pictures in the carousel
-    d3.select("#pic1")
-      .attr("src", painter+"/"+year+".jpg")
-      .classed("hidden",false);
+    if (change == 1){
+      // change the pictures in the carousel
+      d3.select("#pic1")
+        .attr("src", painter+"/"+year+".jpg")
+        .classed("hidden",false);
 
-    d3.select("#pic2")
-      .attr("src", painter+"/"+year+" (2).jpg")
-      .classed("hidden",false);
+      d3.select("#pic2")
+        .attr("src", painter+"/"+year+" (2).jpg")
+        .classed("hidden",false);
 
-    d3.select("#pic3")
-      .attr("src", painter+"/"+year+" (3).jpg")
-      .classed("hidden",false);
-}
+      d3.select("#pic3")
+        .attr("src", painter+"/"+year+" (3).jpg")
+        .classed("hidden",false);
+      }
+  }
 
 /*
   This function is called when the user clicks on a painting.
@@ -509,7 +473,7 @@ function clicker(img){
       .on("mouseout", function(d) {
         d3.select(this).transition()
           .duration(200)
-          .attr("d", arc)
+          .attr("d", arc);
         arcs.select("text.text-tooltip").text(""); });
 
     // make text for slicies
