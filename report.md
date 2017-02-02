@@ -26,23 +26,23 @@ De data voor het tekenen van de grafiek wordt uit een json gehaald. Welke jsonfi
 
 {
 
-                    &quot;blue&quot;: 22.155906565233472,
+                   blue: 22.155906565233472,
 
-                    &quot;total&quot;: 266.83846703573886,
+                   total;: 266.83846703573886,
 
-                   &quot;green&quot;: 36.846470463420985,
+                   green: 36.846470463420985,
 
-                    &quot;red&quot;: 40.99762297134555,
+                   red: 40.99762297134555,
 
-                   &quot;year&quot;: &quot;1913&quot;
+                   year: 1913
 
 },
 
 {
 
-                    &quot;blue&quot;: 35.215789795787614,
+                    blue: 35.215789795787614,
 
-                   &quot;total&quot;: 355.8334477574946,
+                   total;: 355.8334477574946,
 
                     &quot;green&quot;: 36.615292240782686,
 
